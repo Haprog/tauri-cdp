@@ -13,7 +13,6 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "additionalBrowserArgs": "--remote-debugging-port=9222 --disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection",
         "title": "tauri-cdp",
         "width": 800,
         "height": 600
