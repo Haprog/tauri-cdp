@@ -20,11 +20,23 @@ pnpm tauri dev
 
 ## Build
 
+For debug build with CDP enabled:
+
+```shell
+pnpm tauri build --debug
+```
+
+Debug build binary will be created at: `.\src-tauri\target\debug\tauri-cdp.exe`.
+
+### Production
+
+For production build (without CDP):
+
 ```shell
 pnpm tauri build
 ```
 
-After this (on Windows) you can run the generated executable from: `.\src-tauri\target\release\tauri-cdp.exe`.
+Production binary will be created at: `.\src-tauri\target\release\tauri-cdp.exe`.
 
 ## CDP endpoint
 
@@ -59,23 +71,15 @@ This repository was initialized with the following command:
 pnpm create tauri-app
 ```
 
-The only relevant changes done after initializing the app template are:
+The only relevant change done after initializing the app template is:
 
-- Enabled dev tools for `tauri` in `Cargo.toml`
-- Enabled CDP in `tauri.conf.json`
+- Enabled CDP in `./src/lib.rs`
 
 With Tauri, enabling CDP in this way works only on Windows.
 
-CDP is enabled by setting `--remote-debugging-port=9222` for the [additionalBrowserArgs](https://v2.tauri.app/reference/config/#additionalbrowserargs) option in the window configuration object in `tauri.conf.json`.
+CDP is enabled for debug builds by setting the environment variable `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS` to contain `--remote-debugging-port=9222` in the beginning of the `run()` function in `./src/lib.ts`. This is done inside a debug assertion block so it only affects the debug builds.
 
-Alternatively this could also be done by setting an environment variable for example from Rust code by adding this in the beginning of the `run()` function in `./src/lib.ts`:
-
-```rust
-std::env::set_var(
-    "WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS",
-    "--remote-debugging-port=9222"
-);
-```
+Alternatively this could also be done by setting `--remote-debugging-port=9222` for the [additionalBrowserArgs](https://v2.tauri.app/reference/config/#additionalbrowserargs) option in the window configuration object in `tauri.conf.json` but this would enable CDP also for production builds which is bad for security.
 
 ## Recommended IDE Setup
 
