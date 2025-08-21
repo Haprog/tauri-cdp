@@ -4,6 +4,8 @@ This is a simple Tauri 2 app template that has CDP (Chrome DevTools Protocol) en
 
 This enables automated testing of the web view in the Tauri application for example by using Playwright to connect to the CDP port when the Tauri app is running. Unfortunately this way only works on Windows, but it is a very simple setup.
 
+See [playwright-cdp](https://github.com/Haprog/playwright-cdp) for a working test setup for this example app.
+
 ## Prerequisites
 
 See [Tauri prerequisites](https://tauri.app/start/prerequisites/).
